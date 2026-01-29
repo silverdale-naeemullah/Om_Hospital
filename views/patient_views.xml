@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_hospital_patient_tree">
+        <field name="name">hospital.patient.tree</field>
+        <field name="model">om.hospital.patient</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+
+            <list create="1">
+                <field name="name"/>
+                <field name="date_of_birth" optional="hide"/>
+                <field name="phone" optional="hide"/>
+                <field name="email"/>
+            </list>
+        </field>
+
+    </record>
+
+
+    <record model="ir.ui.view" id="view_hospital_patient_form">
+        <field name="name">hospital.patient.form</field>
+        <field name="model">om.hospital.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date_of_birth" optional="show"/>
+                        <field name="tag_ids" widget="many2many_tags" />
+                    </group>
+                    <group>
+                        <field name="phone"/>
+                        <field name="email"/>
+                    </group>
+                </sheet>
+                <chatter>
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </chatter>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hospital_patient" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">om.hospital.patient</field>
+        <field name="view_id" ref="view_hospital_patient_tree"/>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new patient!
+            </p>
+        </field>
+    </record>
+
+</odoo>
