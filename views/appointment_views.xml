@@ -1,7 +1,6 @@
 <odoo>
 
 
-
     <record id="view_hospital_appointment_list" model="ir.ui.view">
         <field name="name">hospital.appointment.list</field>
         <field name="model">hospital.appointment</field>
@@ -33,13 +32,18 @@
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <h1><field name="reference"/></h1>
+                        <h1>
+                            <field name="reference"/>
+                        </h1>
                     </div>
                     <group>
                         <group>
                             <field name="patient_id"/>
                             <field name="date_appointment"/>
                             <field name="appointment_time"/>
+                        </group>
+                        <group>
+                            <field name="total_qty"/>
                         </group>
                     </group>
                     <notebook>
