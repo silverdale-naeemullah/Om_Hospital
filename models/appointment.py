@@ -20,6 +20,9 @@ class HospitalAppointment(models.Model):
         ('cancel', 'Cancelled'),
     ], string='Status', default='draft', tracking=True)
 
+    # ADD THIS LINE:
+    appointment_time = fields.Datetime(string="Appointment Time", default=fields.Datetime.now)
+
     # One2many field definition
     # Parameters: (Co-model name, Inverse field name in the co-model)
     appointment_line_ids = fields.One2many(
@@ -27,6 +30,7 @@ class HospitalAppointment(models.Model):
         'appointment_id',
         string='Lines'
     )
+
 
     # Button Action Methods [00:11:15]
     def action_confirm(self):
@@ -59,14 +63,16 @@ class HospitalAppointment(models.Model):
 
 
 
-# The Model for the individual lines
+
 class HospitalAppointmentLine(models.Model):
-    _name = 'hospital.appointment.line'
-    _description = 'Hospital Appointment Line'
+    _name = "hospital.appointment.line"
+    _description = "Hospital Appointment Line"
 
-    # The Many2one field back to the parent record is REQUIRED
+    # [00:03:45] This is the RELATIONAL FIELD.
+    # It is a Many2one field pointing back to the parent model.
+    # This is required for the One2many relationship to work.
+
     appointment_id = fields.Many2one('hospital.appointment', string='Appointment')
-    product_id = fields.Many2one('product.product', string='Product')
-    qty = fields.Float(string='Quantity')
-
-
+    product_id = fields.Many2one('product.product', string='Product')  # This is the field Odoo was missing!
+    qty = fields.Integer(string='Quantity')
+    price_unit = fields.Float(string='Unit Price')

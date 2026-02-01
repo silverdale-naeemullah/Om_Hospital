@@ -11,7 +11,7 @@
     'license': 'LGPL-3',
 
 
-    'depends': ['base', 'mail' , 'product'],
+    'depends': ['base', 'mail', 'product'],
     'data': [
         'security/ir.model.access.csv',
         'views/patient_views.xml',
